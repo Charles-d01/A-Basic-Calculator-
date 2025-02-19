@@ -20,14 +20,49 @@ def button_clear():
 
 def button_add():
      global initial_value
+     global math
+     math = "addition"
+     initial_value = int(entry_value.get())
+     entry_value.delete(0, END)
+
+def button_subtract():
+     global initial_value
+     global math
+     math = "subtraction"
+     initial_value = int(entry_value.get())
+     entry_value.delete(0, END)
+
+def button_mutiply():
+     global initial_value
+     global math
+     math = "multiplication"
+     initial_value = int(entry_value.get())
+     entry_value.delete(0, END)
+
+def button_divide():
+     global initial_value
+     global math
+     math = "division"
      initial_value = int(entry_value.get())
      entry_value.delete(0, END)
 
 def button_equal():
      second_value = entry_value.get()
      entry_value.delete(0, END)
-     entry_value.insert(0, initial_value + int(second_value))
+     if math == "addition":
+          entry_value.insert(0, initial_value + int(second_value))
 
+     elif math == "subtraction":
+          entry_value.insert(0, initial_value - int(second_value))
+
+     elif math == "multiplication":
+          entry_value.insert(0, initial_value * int(second_value))
+
+     elif math == "division":
+          entry_value.insert(0, initial_value / int(second_value))
+
+     else:
+          print("invalid values")
 
 # defining buttons
 button1 = Button(root, text="1", padx=40, pady=20, command= lambda: button_click(1))
@@ -40,9 +75,12 @@ button7 = Button(root, text="7", padx=40, pady=20, command=lambda: button_click(
 button8 = Button(root, text="8", padx=40, pady=20, command=lambda: button_click(8))
 button9 = Button(root, text="9", padx=40, pady=20, command=lambda: button_click(9))
 button0 = Button(root, text="0", padx=40, pady=20, command=lambda: button_click(0))
-button_addition = Button(root, text="+", padx=40, pady=91,command= button_add)
-button_equals = Button(root, text="=", padx=91, pady=20, command=lambda: button_equal())
-button_erase = Button(root, text="clear", padx=40, pady=20, command=button_clear)
+button_addition = Button(root, text="+", padx=40, pady=20,command= button_add)
+button_subtraction = Button(root, text="-", padx=40, pady=20,command= button_subtract)
+button_multiplication = Button(root, text="x", padx=40, pady=20,command= button_mutiply)
+button_division = Button(root, text="/", padx=40, pady=20,command= button_divide)
+button_equals = Button(root, text="=", padx=40, pady=20, command=lambda: button_equal())
+button_erase = Button(root, text="clear", padx=31, pady=20, command=button_clear)
 
 # clicking button on to screen
 button1.grid(row=3, column=0)
@@ -59,9 +97,13 @@ button9.grid(row=1, column=2)
 
 button0.grid(row=4, column=0)
 button_erase.grid(row=4, column=1)
-button_equals.grid(row=4, column=2, columnspan=2)
+button_equals.grid(row=4, column=2)
 
-button_addition.grid(row=1, column=3, rowspan=3)
+button_addition.grid(row=1, column=3)
+button_subtraction.grid(row=2, column=3)
+button_multiplication.grid(row=4, column=3)
+
+button_division.grid(row=3, column=3)
 
 
 root.mainloop()
